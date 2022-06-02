@@ -57,29 +57,12 @@
 
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage[utf8]{inputenc} % Required for inputting international characters
-\usepackage[quiet]{fontspec} % Allows the use of fontspec
-\usepackage{txfonts} % Allows the use of Lato fonts
 
-% Selecting Google's Lato font-family, as it is free to use
-
-% Bold and italic were not working, so I defined them for the main font
-% manually as follows:
-
-\defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor,
-BoldFont=Lato-Bold.ttf,
-ItalicFont=Lato-LightItalic.ttf,
-BoldItalicFont=Lato-BoldItalic.ttf
-]
-{Lato-Regular.ttf}
-
-\newfontfamily\bodyfont
-[BoldFont=Lato-Bold.ttf,
-ItalicFont=Lato-LightItalic.ttf,
-BoldItalicFont=Lato-BoldItalic.ttf]
-{Lato-Regular.ttf}
-
-\newfontfamily\thinfont[]{Lato-Light.ttf}
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage{lmodern} % Allows the use of Lato fonts
+$endif$
 
 %----------------------------------------------------------------------------
 %	DOCUMENT MARGINS
@@ -141,8 +124,8 @@ BoldItalicFont=Lato-BoldItalic.ttf]
 %	SIGNATURE STRUCTURE
 %------------------------------------------------------------------------------
 % The signature is a combination of the author's name, title and institution
-\signature{$author$, $from_professional_title$\\
-           $from_institution$} 
+\signature{$author$$if(from_professional_title)$, $from_professional_title$$endif$$if(from_institution)$\\
+           $from_institution$$endif$} 
 
 % I will later combine the option of inserting a signature within it
            
@@ -163,13 +146,25 @@ BoldItalicFont=Lato-BoldItalic.ttf]
 %-------------------------------------------------------------------------------
 
 \authordetails{
+    $if(from_position)$
     $from_position$\\
-	\thinfont{$from_department$\\ % Sender's department/institution
+    $endif$
+        $if(from_department)$
+	$from_department$\\ % Sender's department/institution
+	$endif$
+    $if(from_institution)$
     $from_institution$\\
+    $endif$
+    $if(from_address)$
     $from_address$\\ % Sender's address
-	$from_city$, $from_state_province$\\ % Sender's city, state or province,
+    $endif$
+	$if(from_city)$$from_city$$endif$$if(from_state_province)$, $from_state_province$$endif$\\ % Sender's city, state or province,
+    $if(from_postalcode)$
     $from_postalcode$\\ % postal code
-    $from_country$}
+    $endif$
+    $if(from_country)$
+    $from_country$
+    $endif$
 }
 
 %------------------------------------------------------------------------------
@@ -178,7 +173,6 @@ BoldItalicFont=Lato-BoldItalic.ttf]
 
 \recipientdetails{
 $to_professional_title$ $to_name$\\
-    \thinfont{
     $if(to_department)$
 $to_department$\\
 $endif$
@@ -194,10 +188,10 @@ $to_postal_code$\\
 $endif$
     $if(to_country)$
 $to_country$
-$endif$}
+$endif$
     $if(subject)$
     \\~\\
-\bodyfont{Subject: $subject$}
+Subject: $subject$
 $endif$
 }
 
@@ -207,42 +201,66 @@ $endif$
 
 \fancypagestyle{firstpage}{
     \fancyhf{}
+        $if(from_institution_logo)$
         \fancyhead[L]{
             \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
             }
+	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_email)$
               $from_email$\\ % Sender's email address
+	      $endif$
+	      $if(from_personal_website)$
               $from_personal_website$ \\ % Sender's URL
+	      $endif$
+	      $if(from_phone)$
               $from_phone$ % Sender's phone number
+	      $endif$
               }
             }
         }
 
 \fancypagestyle{plain}{
     \fancyhf{}
+        $if(from_institution_logo)$
         \fancyhead[L]{
             \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
             }
+	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_email)$
               $from_email$\\ % Sender's email address
+	      $endif$
+	      $if(from_personal_website)$
               $from_personal_website$ \\ % Sender's URL
+	      $endif$
+	      $if(from_phone)$
               $from_phone$ % Sender's phone number
+	      $endif$
               }
             }
         }
 
 \fancypagestyle{empty}{
     \fancyhf{}
+        $if(from_institution_logo)$
         \fancyhead[L]{
             \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
             }
+	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_email)$
               $from_email$\\ % Sender's email address
+	      $endif$
+	      $if(from_personal_website)$
               $from_personal_website$ \\ % Sender's URL
+	      $endif$
+	      $if(from_phone)$
               $from_phone$ % Sender's phone number
+	      $endif$
               }
             }
         }
