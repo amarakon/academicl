@@ -94,7 +94,6 @@ $endif$
  % Include the author's details on the right side of the page under the line
 	\raggedleft{
 		\footnotesize{ % Use a smaller font size
-		$author$\\ % Author name
 		\authordetails\\
        \hspace{1mm}
        }
@@ -208,14 +207,14 @@ $endif$
 	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_phone)$
+              $from_phone$\\ % Sender's phone number
+	      $endif$
 	      $if(from_email)$
               $from_email$\\ % Sender's email address
 	      $endif$
 	      $if(from_personal_website)$
-              $from_personal_website$ \\ % Sender's URL
-	      $endif$
-	      $if(from_phone)$
-              $from_phone$ % Sender's phone number
+              $from_personal_website$ % Sender's URL
 	      $endif$
               }
             }
@@ -230,14 +229,14 @@ $endif$
 	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_phone)$
+              $from_phone$\\ % Sender's phone number
+	      $endif$
 	      $if(from_email)$
               $from_email$\\ % Sender's email address
 	      $endif$
 	      $if(from_personal_website)$
-              $from_personal_website$ \\ % Sender's URL
-	      $endif$
-	      $if(from_phone)$
-              $from_phone$ % Sender's phone number
+              $from_personal_website$ % Sender's URL
 	      $endif$
               }
             }
@@ -252,14 +251,14 @@ $endif$
 	$endif$
         \fancyhead[R]{$author$\\
             \footnotesize{
+	      $if(from_phone)$
+              $from_phone$\\ % Sender's phone number
+	      $endif$
 	      $if(from_email)$
               $from_email$\\ % Sender's email address
 	      $endif$
 	      $if(from_personal_website)$
-              $from_personal_website$ \\ % Sender's URL
-	      $endif$
-	      $if(from_phone)$
-              $from_phone$ % Sender's phone number
+              $from_personal_website$ % Sender's URL
 	      $endif$
               }
             }
