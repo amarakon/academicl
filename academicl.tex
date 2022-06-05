@@ -61,7 +61,7 @@
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
-\usepackage{lmodern} % Allows the use of Lato fonts
+\usepackage{lmodern} % Latin Modern font
 $endif$
 
 %----------------------------------------------------------------------------
@@ -108,7 +108,7 @@ $endif$
 \renewcommand{\opening}[1]{
 	{\fromaddress
     \vspace{0.05\textheight}\\ % Print the sender's address here and add some whitespace to allow the printing of the date
-    \raggedleft{$date$} % Include the date, aligned to the right
+    \raggedleft{$if(date)$$date$$else$\today$endif$} % Include the date, aligned to the right
     \par % par
     }
 	{\raggedright 
